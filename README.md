@@ -2,27 +2,39 @@
 
 ## create database
 
+```SQL
 CREATE DATABASE universe;
+```
 
 ## connect to database
 
+```SQL
 \c universe;
+```
 
 ## create Galaxy_Types table
 
+```SQL
 CREATE TABLE galaxy_type(galaxy_type_id SERIAL PRIMARY KEY,name VARCHAR(30) NOT NULL CONSTRAINT galaxy_type_name_unique UNIQUE,description TEXT);
+````
 
 ## create Galaxy table
 
+```SQL
 CREATE TABLE galaxy(galaxy_id SERIAL PRIMARY KEY, name VARCHAR(30) NOT NULL CONSTRAINT galaxy_name_unique UNIQUE, description TEXT, distance_from_earth_in_ly INT, galaxy_type_id INT REFERENCES galaxy_type(galaxy_type_id));
+```
 
 ## create Star table
 
+```SQL
 CREATE TABLE star(star_id SERIAL PRIMARY KEY, name VARCHAR(30) NOT NULL CONSTRAINT star_name_unique UNIQUE, description TEXT, temperature_in_kelvin INT, galaxy_id INT REFERENCES galaxy(galaxy_id), diameter_km NUMERIC(38,1) );
+```
 
 ## create Planet table
 
+```SQL
 CREATE TABLE planet( planet_id SERIAL PRIMARY KEY, name VARCHAR(30) NOT NULL CONSTRAINT planet_name_unique UNIQUE, description TEXT, star_id INT REFERENCES star(star_id), has_life BOOLEAN, diameter_km NUMERIC(38,1) );
+```
 
 ## create Moon table
 
